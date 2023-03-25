@@ -1,0 +1,15 @@
+{
+  "item.tutorialmod.zircon": "Zircônia",
+  "item.tutorialmod.raw_zircon": "Zircônia crua",
+
+  "block.tutorialmod.zircon_block": "Bloco de zircônia",
+  "block.tutorialmod.zircon_ore": "Minério de zircônia",
+  "block.tutorialmod.deepslate_zircon_ore": "Minério de zircônia de ardósia",
+  "block.tutorialmod.netherrack_zircon_ore": "Minério de zircônia do Nether",
+  "block.tutorialmod.endstone_zircon_ore": "Minério de zircônia do End",
+
+  "item.tutorialmod.eight_ball": "Bola Oito",
+
+
+  "itemGroup.tutorialtab": "Zircônia Tutorial"
+}
