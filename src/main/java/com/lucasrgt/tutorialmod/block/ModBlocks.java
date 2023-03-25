@@ -1,6 +1,7 @@
 package com.lucasrgt.tutorialmod.block;
 
 import com.lucasrgt.tutorialmod.TutorialMod;
+import com.lucasrgt.tutorialmod.block.custom.JumpyBlock;
 import com.lucasrgt.tutorialmod.item.ModCreativeModeTab;
 import com.lucasrgt.tutorialmod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -55,7 +56,11 @@ public class ModBlocks {
             ModCreativeModeTab.TUTORIAL_TAB
     );
 
-
+    private static final RegistryObject<Block> JUMPY_BLOCK = registerBlock("jumpy_block",
+            () -> new JumpyBlock(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(6f)),
+            ModCreativeModeTab.TUTORIAL_TAB
+            );
 
     private static final RegistryObject<Block> ZIRCON_BLOCK = registerBlock("zircon_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE).strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.TUTORIAL_TAB);
