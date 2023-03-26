@@ -1,7 +1,9 @@
 package com.lucasrgt.tutorialmod.block;
 
 import com.lucasrgt.tutorialmod.TutorialMod;
+import com.lucasrgt.tutorialmod.block.custom.BlueberryCropBlock;
 import com.lucasrgt.tutorialmod.block.custom.JumpyBlock;
+import com.lucasrgt.tutorialmod.block.custom.ZirconLampBlock;
 import com.lucasrgt.tutorialmod.item.ModCreativeModeTab;
 import com.lucasrgt.tutorialmod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -9,6 +11,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -24,7 +27,7 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, TutorialMod.MOD_ID);
 
 
-    private static final RegistryObject<Block> ZIRCON_ORE = registerBlock("zircon_ore",
+    public static final RegistryObject<Block> ZIRCON_ORE = registerBlock("zircon_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(6f)
                     .requiresCorrectToolForDrops(),
@@ -32,7 +35,7 @@ public class ModBlocks {
                     ModCreativeModeTab.TUTORIAL_TAB
             );
 
-    private static final RegistryObject<Block> DEEPSLATE_ZIRCON_ORE = registerBlock("deepslate_zircon_ore",
+    public static final RegistryObject<Block> DEEPSLATE_ZIRCON_ORE = registerBlock("deepslate_zircon_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(6f)
                     .requiresCorrectToolForDrops(),
@@ -40,7 +43,7 @@ public class ModBlocks {
             ModCreativeModeTab.TUTORIAL_TAB
     );
 
-    private static final RegistryObject<Block> NETHERRACK_ZIRCON_ORE = registerBlock("netherrack_zircon_ore",
+    public static final RegistryObject<Block> NETHERRACK_ZIRCON_ORE = registerBlock("netherrack_zircon_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(6f)
                     .requiresCorrectToolForDrops(),
@@ -48,7 +51,7 @@ public class ModBlocks {
             ModCreativeModeTab.TUTORIAL_TAB
     );
 
-    private static final RegistryObject<Block> ENDSTONE_ZIRCON_ORE = registerBlock("endstone_zircon_ore",
+    public static final RegistryObject<Block> ENDSTONE_ZIRCON_ORE = registerBlock("endstone_zircon_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(6f)
                     .requiresCorrectToolForDrops(),
@@ -56,15 +59,22 @@ public class ModBlocks {
             ModCreativeModeTab.TUTORIAL_TAB
     );
 
-    private static final RegistryObject<Block> JUMPY_BLOCK = registerBlock("jumpy_block",
+    public static final RegistryObject<Block> JUMPY_BLOCK = registerBlock("jumpy_block",
             () -> new JumpyBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(6f)),
             ModCreativeModeTab.TUTORIAL_TAB
             );
 
-    private static final RegistryObject<Block> ZIRCON_BLOCK = registerBlock("zircon_block",
+    public static final RegistryObject<Block> ZIRCON_BLOCK = registerBlock("zircon_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE).strength(6f).requiresCorrectToolForDrops()), ModCreativeModeTab.TUTORIAL_TAB);
 
+    public static final RegistryObject<Block> ZIRCON_LAMP = registerBlock("zircon_lamp",
+            () -> new ZirconLampBlock(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(4f).lightLevel(state -> state.getValue(ZirconLampBlock.LIT) ? 15 : 0)),
+            ModCreativeModeTab.TUTORIAL_TAB);
+
+    public static final RegistryObject<Block> BLUEBERRY_CROP = BLOCKS.register("blueberry_crop",
+            () -> new BlueberryCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
 
     public static final <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
@@ -72,7 +82,8 @@ public class ModBlocks {
         return toReturn;
     }
 
-    private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab tab) {
+
+    public static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab tab) {
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));
     }
 

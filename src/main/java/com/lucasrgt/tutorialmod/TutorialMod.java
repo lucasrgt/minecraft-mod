@@ -2,8 +2,12 @@ package com.lucasrgt.tutorialmod;
 
 import com.lucasrgt.tutorialmod.block.ModBlocks;
 import com.lucasrgt.tutorialmod.item.ModItems;
+import com.lucasrgt.tutorialmod.painting.ModPaintings;
+import com.lucasrgt.tutorialmod.villager.ModVillagers;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -30,6 +34,10 @@ public class TutorialMod
 
         ModBlocks.register(modEventBus);
 
+        ModVillagers.register(modEventBus);
+
+        ModPaintings.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -37,9 +45,9 @@ public class TutorialMod
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
-        LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
+        event.enqueueWork(() -> {
+           ModVillagers.registerPOIs();
+        });
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
@@ -49,9 +57,7 @@ public class TutorialMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLUEBERRY_CROP.get(), RenderType.cutout());
         }
     }
 }
